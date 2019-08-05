@@ -55,18 +55,28 @@ export default function Details({ match }) {
       <Meetup>
         <header>
           <h1>{meetup.title}</h1>
-          <aside>
-            <Button
-              color="#4DBAF9"
-              type="button"
-              onClick={() => history.push(`/addedit/${meetup.id}`)}
-            >
-              <MdModeEdit size={20} color="#fff" /> Editar
-            </Button>
-            <Button color="#D44059" type="button" onClick={handleDeleteMeetup}>
-              <MdDeleteForever size={20} color="#fff" /> Cancelar
-            </Button>
-          </aside>
+          {!meetup.past ? (
+            <aside>
+              <Button
+                color="#4DBAF9"
+                type="button"
+                onClick={() => history.push(`/addedit/${meetup.id}`)}
+              >
+                <MdModeEdit size={20} color="#fff" /> Editar
+              </Button>
+              <Button
+                color="#D44059"
+                type="button"
+                onClick={handleDeleteMeetup}
+              >
+                <MdDeleteForever size={20} color="#fff" /> Cancelar
+              </Button>
+            </aside>
+          ) : (
+            <span>
+              <strong>Este evento já terminou</strong>
+            </span>
+          )}
         </header>
         <img src={meetup.url} alt={meetup.title} />
         <span>{meetup.description}</span>
